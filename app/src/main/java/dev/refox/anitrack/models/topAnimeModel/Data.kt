@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Data(
     @SerializedName("aired")
-    val aired: dev.refox.anitrack.models.topAnimeModel.Aired,
+    val aired: Aired,
     @SerializedName("airing")
     val airing: Boolean,
     @SerializedName("approved")
@@ -13,9 +13,9 @@ data class Data(
     @SerializedName("background")
     val background: String,
     @SerializedName("broadcast")
-    val broadcast: dev.refox.anitrack.models.topAnimeModel.Broadcast,
+    val broadcast: Broadcast,
     @SerializedName("demographics")
-    val demographics: List<dev.refox.anitrack.models.topAnimeModel.Demographic>,
+    val demographics: List<Demographic>,
     @SerializedName("duration")
     val duration: String,
     @SerializedName("episodes")
@@ -25,11 +25,11 @@ data class Data(
     @SerializedName("favorites")
     val favorites: Int,
     @SerializedName("genres")
-    val genres: List<dev.refox.anitrack.models.topAnimeModel.Genre>,
+    val genres: List<Genre>,
     @SerializedName("images")
-    val images: dev.refox.anitrack.models.topAnimeModel.Images,
+    val images: Images,
     @SerializedName("licensors")
-    val licensors: List<dev.refox.anitrack.models.topAnimeModel.Licensor>,
+    val licensors: List<Licensor>,
     @SerializedName("mal_id")
     val malId: Int,
     @SerializedName("members")
@@ -37,7 +37,7 @@ data class Data(
     @SerializedName("popularity")
     val popularity: Int,
     @SerializedName("producers")
-    val producers: List<dev.refox.anitrack.models.topAnimeModel.Producer>,
+    val producers: List<Producer>,
     @SerializedName("rank")
     val rank: Int,
     @SerializedName("rating")
@@ -53,11 +53,11 @@ data class Data(
     @SerializedName("status")
     val status: String,
     @SerializedName("studios")
-    val studios: List<dev.refox.anitrack.models.topAnimeModel.Studio>,
+    val studios: List<Studio>,
     @SerializedName("synopsis")
     val synopsis: String,
     @SerializedName("themes")
-    val themes: List<dev.refox.anitrack.models.topAnimeModel.Theme>,
+    val themes: List<Theme>,
     @SerializedName("title")
     val title: String,
     @SerializedName("title_english")

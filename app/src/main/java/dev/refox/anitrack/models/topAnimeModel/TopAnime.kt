@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class TopAnime(
     @SerializedName("data")
-    val `data`: List<dev.refox.anitrack.models.topAnimeModel.Data>,
+    val `data`: List<Data>,
     @SerializedName("pagination")
-    val pagination: dev.refox.anitrack.models.topAnimeModel.Pagination
+    val pagination: Pagination
 )

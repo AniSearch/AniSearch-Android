@@ -3,12 +3,13 @@ package dev.refox.anitrack.networking
 import dev.refox.anitrack.models.searchedAnimeModel.SearchedAnime
 import dev.refox.anitrack.models.topAnimeModel.TopAnime
 import retrofit2.Call
+import retrofit2.Response
 
 class Repository {
-    suspend fun getTopAnime(): Call<dev.refox.anitrack.models.topAnimeModel.TopAnime>{
+    suspend fun getTopAnime(): Response<TopAnime>{
         return AnimeRetrofitInstance.api.getTopAnime()
     }
-    suspend fun getAnimeSearch(queryString: String): Call<SearchedAnime> {
+    suspend fun getAnimeSearch(queryString: String): Response<SearchedAnime> {
         return AnimeRetrofitInstance.api.getAnimeSearch(queryString);
     }
 }

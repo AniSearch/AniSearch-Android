@@ -1,60 +1,108 @@
 package dev.refox.anitrack.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dev.refox.anitrack.R
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import dev.refox.anitrack.adapters.AnimeTopSearchAdapter
+import dev.refox.anitrack.databinding.FragmentSearchAnimeBinding
+import dev.refox.anitrack.models.topAnimeModel.TopAnime
+import dev.refox.anitrack.networking.Repository
+import dev.refox.anitrack.viewmodels.AnimeViewModel
+import dev.refox.anitrack.viewmodels.AnimeViewModelFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private lateinit var animeViewModel: AnimeViewModel
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchAnimeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SearchAnimeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentSearchAnimeBinding? = null
+    private val binding
+        get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private lateinit var animeList: ArrayList<TopAnime>
+
+    private val repository: Repository by lazy {
+        Repository()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_anime, container, false)
+
+        _binding = FragmentSearchAnimeBinding.inflate(inflater, container,false)
+
+        animeViewModel = ViewModelProvider(this, AnimeViewModelFactory(repository))[AnimeViewModel::class.java]
+
+        animeList = arrayListOf<TopAnime>()
+
+        animeViewModel.getTopAnime()
+
+        binding.searchRecyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        binding.searchRecyclerView.adapter = AnimeTopSearchAdapter(requireActivity(),animeList)
+
+        animeViewModel.topResponse.observe(viewLifecycleOwner, Observer{
+            Log.d("debz", it.body()!!.data.get(1).title)
+
+
+        })
+
+        binding.btnSearch.setOnClickListener {
+//            var query: String = binding.searchEditText.text.toString()
+//
+//            if(query.isNotEmpty()){
+//                animeViewModel.getAnimeSearch(query)
+//            }
+
+        }
+
+
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchAnimeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchAnimeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        binding=FragmentSearchAnimeBinding.bind(view)
+//
+//        animeViewModel = ViewModelProvider(this, AnimeViewModelFactory(repository))[AnimeViewModel::class.java]
+//
+//        animeList = arrayListOf<TopAnime>()
+//
+//        animeViewModel.getTopAnime()
+//
+//        binding.searchRecyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+//        binding.searchRecyclerView.adapter = AnimeTopSearchAdapter(context,
+//            animeList
+//        )
+//
+//        animeViewModel.topResponse.observe(viewLifecycleOwner, Observer{
+//            Log.d("debz", it.body()!!.data.get(1).title)
+//
+//
+//        })
+//
+//        binding.btnSearch.setOnClickListener {
+////            var query: String = binding.searchEditText.text.toString()
+////
+////            if(query.isNotEmpty()){
+////                animeViewModel.getAnimeSearch(query)
+////            }
+//
+//            animeViewModel.getTopAnime()
+//            binding.searchRecyclerView.adapter = AnimeTopSearchAdapter(activity,animeList)
+//        }
+//    }
+
 }

@@ -8,6 +8,7 @@
         android:id="@+id/animeItemCard"
         android:layout_width="0dp"
         android:layout_height="200dp"
+        app:cardCornerRadius="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,6 +17,26 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/animePic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                />
+
+            <TextView
+                android:id="@+id/animeName"
+                android:padding="8dp"
+                android:background="@color/dark"
+                android:text="One Piece"
+                android:textColor="@color/white"
+                android:fontFamily="@font/nunito_semibold"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

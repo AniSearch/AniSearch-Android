@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/searchAnimeFragment2">
+
+    <fragment
+        android:id="@+id/searchAnimeFragment2"
+        android:name="dev.refox.anitrack.ui.SearchAnimeFragment"
+        android:label="fragment_search_anime"
+        tools:layout="@layout/fragment_search_anime" >
+        <action
+            android:id="@+id/action_searchAnimeFragment2_to_watchListFragment2"
+            app:destination="@id/watchListFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/watchListFragment2"
+        android:name="dev.refox.anitrack.ui.WatchListFragment"
+        android:label="fragment_watch_list"
+        tools:layout="@layout/fragment_watch_list" >
+        <action
+            android:id="@+id/action_watchListFragment2_to_searchAnimeFragment2"
+            app:destination="@id/searchAnimeFragment2" />
+    </fragment>
+</navigation>

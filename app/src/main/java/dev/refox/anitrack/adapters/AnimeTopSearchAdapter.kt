@@ -6,16 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import dev.refox.anitrack.R
-import dev.refox.anitrack.models.topAnimeModel.TopAnime
+import dev.refox.anitrack.models.topAnimeModel.Data
+import dev.refox.anitrack.ui.AnimeDetailsBottomSheet
 
 class AnimeTopSearchAdapter(
-    val parentActivity: FragmentActivity?,
-    val animeList: ArrayList<TopAnime>
+    val animeList: MutableList<Data>
 ) : RecyclerView.Adapter<AnimeTopSearchAdapter.AnimeViewHolder>() {
+
+    var onItemClick : ((Data) -> Unit)? = null
 
     class AnimeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val animePic: ImageView = itemView.findViewById(R.id.animePic)
@@ -31,8 +34,13 @@ class AnimeTopSearchAdapter(
     override fun onBindViewHolder(holder: AnimeViewHolder, position: Int) {
         val anime = animeList[position]
 
-        holder.animeName.text = anime.data[position].title
-        Picasso.get().load(anime.data[position].images.jpg.imageUrl).into(holder.animePic)
+        holder.animeName.text = anime.title
+        Picasso.get().load(anime.images.jpg.imageUrl).into(holder.animePic)
+
+        holder.itemView.setOnClickListener(){
+          onItemClick?.invoke(anime)
+        }
+
     }
 
     override fun getItemCount(): Int {

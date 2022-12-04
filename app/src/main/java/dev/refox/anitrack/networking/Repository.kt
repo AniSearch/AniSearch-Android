@@ -9,7 +9,7 @@ class Repository {
     suspend fun getTopAnime(): Response<TopAnime>{
         return AnimeRetrofitInstance.api.getTopAnime()
     }
-    suspend fun getAnimeSearch(queryString: String): Response<SearchedAnime> {
+    suspend fun getAnimeSearch(queryString: String): Response<TopAnime> {
         return AnimeRetrofitInstance.api.getAnimeSearch(queryString);
     }
 }

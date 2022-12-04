@@ -10,11 +10,9 @@ import retrofit2.http.Query
 
 interface AnimeApiInterface {
 
-    @Headers("Content-Type: application/json")
-
-    @GET("top/anime/")
+    @GET("v4/top/anime/")
     suspend fun getTopAnime(): Response<TopAnime>
 
-    @GET("/anime")
-    suspend fun getAnimeSearch(@Query("q")queryString: String): Response<SearchedAnime>
+    @GET("v4/anime/")
+    suspend fun getAnimeSearch(@Query("q")queryString: String): Response<TopAnime>
 }

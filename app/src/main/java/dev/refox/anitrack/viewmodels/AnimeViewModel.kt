@@ -10,8 +10,8 @@ import retrofit2.Response
 
 class AnimeViewModel(private val repository: Repository): ViewModel() {
 
-    private val _searchResponse = MutableLiveData<Response<SearchedAnime>>()
-    val searchResponse: LiveData<Response<SearchedAnime>> get() = _searchResponse
+    private val _searchResponse = MutableLiveData<Response<TopAnime>>()
+    val searchResponse: LiveData<Response<TopAnime>> get() = _searchResponse
 
     private val _topResponse = MutableLiveData<Response<TopAnime>>()
     val topResponse: LiveData<Response<TopAnime>> get() = _topResponse

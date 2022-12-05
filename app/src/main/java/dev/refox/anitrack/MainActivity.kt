@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dev.refox.anitrack.databinding.ActivityMainBinding
+import dev.refox.anitrack.ui.AnimeDetailsBottomSheet
 import dev.refox.anitrack.ui.SearchAnimeFragment
 import dev.refox.anitrack.ui.WatchListFragment
 
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         replaceFragment(SearchAnimeFragment())
+
 
         binding.bottomNav.setOnItemSelectedListener {
 

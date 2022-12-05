@@ -1,13 +1,14 @@
 package dev.refox.anitrack.ui
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 import dev.refox.anitrack.databinding.AnimeBottomSheetBinding
@@ -32,18 +33,28 @@ class AnimeDetailsBottomSheet(val anime: Data): BottomSheetDialogFragment(){
         binding.apply{
             Picasso.get().load(anime.images.jpg.imageUrl).into(ivAnimePic)
             tvAnimeName.text = anime.title
-            tvRating.text = anime.score.toString()
-            tvStatus.text = anime.status
-            tvEpisodes.text = anime.episodes.toString()
+            tvRating.text = "Rating: " + anime.score.toString()
+            tvStatus.text = "Status: " + anime.status
+            tvEpisodes.text = "Episodes: " + anime.episodes.toString()
             tvSynopsis.text = anime.synopsis
-            tvSeason.text = anime.season
+            tvSeason.text = "Season: " + anime.season
 
             tvKnowMore.setOnClickListener {
                 openCustomTab(activity, Uri.parse(anime.url))
             }
 
             tvWatchTrailer.setOnClickListener{
-                openCustomTab(activity, Uri.parse(anime.trailer.url))
+
+                var url = anime.trailer.url
+
+                if(url.isNullOrEmpty()){
+                    Toast.makeText(context, "Trailer not provided by MyAnimeList", Toast.LENGTH_SHORT).show()
+
+                } else {
+                    openCustomTab(activity, Uri.parse(anime.trailer.url))
+                }
+
+
             }
         }
 

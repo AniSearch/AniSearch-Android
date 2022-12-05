@@ -1,6 +1,6 @@
 package dev.refox.anitrack.ui
 
-import android.annotation.SuppressLint
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,10 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.card.MaterialCardView
 import dev.refox.anitrack.R
+import dev.refox.anitrack.R.id.btnAddToLib
 import dev.refox.anitrack.adapters.AnimeTopSearchAdapter
 import dev.refox.anitrack.databinding.FragmentSearchAnimeBinding
 import dev.refox.anitrack.models.topAnimeModel.Data
@@ -38,7 +41,6 @@ class SearchAnimeFragment : Fragment() {
 
     }
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,6 +68,14 @@ class SearchAnimeFragment : Fragment() {
 
             animeAdapter.onItemClick = {
                 val dialog = AnimeDetailsBottomSheet(it)
+
+                val bottomSheetView = inflater.inflate(R.layout.anime_bottom_sheet, null)
+                val btnAdd = bottomSheetView.findViewById<MaterialCardView>(btnAddToLib)
+
+                btnAdd.setOnClickListener {
+                    Toast.makeText(requireContext(), "Adding Anime to Library", Toast.LENGTH_SHORT).show()
+                }
+
                 dialog.setCancelable(true)
                 dialog.show(parentFragmentManager,"AnimeBottomSheetDialog")
             }
@@ -97,6 +107,14 @@ class SearchAnimeFragment : Fragment() {
 
                 animeAdapter.onItemClick = {
                     val dialog = AnimeDetailsBottomSheet(it)
+
+                    val bottomSheetView = inflater.inflate(R.layout.anime_bottom_sheet, null)
+                    val btnAdd = bottomSheetView.findViewById<MaterialCardView>(btnAddToLib)
+
+                    btnAdd.setOnClickListener {
+                        Toast.makeText(requireContext(), "Adding Anime to Library", Toast.LENGTH_SHORT).show()
+                    }
+
                     dialog.setCancelable(true)
                     dialog.show(parentFragmentManager,"AnimeBottomSheetDialog")
                 }

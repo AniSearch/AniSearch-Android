@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import dev.refox.anitrack.R
 import dev.refox.anitrack.models.topAnimeModel.Data
-import dev.refox.anitrack.ui.AnimeDetailsBottomSheet
+
 
 class AnimeTopSearchAdapter(
     val animeList: MutableList<Data>

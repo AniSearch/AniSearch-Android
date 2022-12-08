@@ -57,9 +57,9 @@ class AnimeDetailsBottomSheet(val anime: Data): BottomSheetDialogFragment(){
 
             }
 
-            btnAddToLib.setOnClickListener {
-                Toast.makeText(requireContext(), "Added to Library", Toast.LENGTH_SHORT).show()
-            }
+//            btnAddToLib.setOnClickListener {
+//                Toast.makeText(requireContext(), "Added to Library", Toast.LENGTH_SHORT).show()
+//            }
         }
 
         return binding.root

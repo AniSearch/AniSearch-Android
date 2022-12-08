@@ -16,6 +16,7 @@ import com.google.android.material.card.MaterialCardView
 import dev.refox.anitrack.R
 import dev.refox.anitrack.R.id.btnAddToLib
 import dev.refox.anitrack.adapters.AnimeTopSearchAdapter
+import dev.refox.anitrack.databinding.AnimeBottomSheetBinding
 import dev.refox.anitrack.databinding.FragmentSearchAnimeBinding
 import dev.refox.anitrack.models.topAnimeModel.Data
 import dev.refox.anitrack.networking.Repository
@@ -28,8 +29,11 @@ private lateinit var animeAdapter: AnimeTopSearchAdapter
 @Suppress("DEPRECATION")
 class SearchAnimeFragment : Fragment() {
     private var _binding: FragmentSearchAnimeBinding? = null
+    private var _binding2: AnimeBottomSheetBinding? = null
     private val binding
         get() = _binding!!
+    private val binding2
+        get() = _binding2!!
 
 
     private val repository: Repository by lazy {
@@ -47,6 +51,7 @@ class SearchAnimeFragment : Fragment() {
     ): View? {
 
         _binding = FragmentSearchAnimeBinding.inflate(inflater, container, false)
+        _binding2 = AnimeBottomSheetBinding.inflate(inflater, container, false)
 
         animeViewModel =
             ViewModelProvider(this, AnimeViewModelFactory(repository))[AnimeViewModel::class.java]
@@ -108,11 +113,15 @@ class SearchAnimeFragment : Fragment() {
                 animeAdapter.onItemClick = {
                     val dialog = AnimeDetailsBottomSheet(it)
 
-                    val bottomSheetView = inflater.inflate(R.layout.anime_bottom_sheet, null)
-                    val btnAdd = bottomSheetView.findViewById<MaterialCardView>(btnAddToLib)
-
-                    btnAdd.setOnClickListener {
-                        Toast.makeText(requireContext(), "Adding Anime to Library", Toast.LENGTH_SHORT).show()
+//                    val bottomSheetView = inflater.inflate(R.layout.anime_bottom_sheet, null)
+//                    val btnAdd = bottomSheetView.findViewById<MaterialCardView>(btnAddToLib)
+//
+//                    btnAdd.setOnClickListener {
+//                        Toast.makeText(requireContext(), "Adding Anime to Library", Toast.LENGTH_SHORT).show()
+//                    }
+//
+                    binding2.btnAddToLib.setOnClickListener {
+                        Toast.makeText(context, "Leo kaam kr rha", Toast.LENGTH_SHORT).show()
                     }
 
                     dialog.setCancelable(true)

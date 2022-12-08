@@ -9,10 +9,18 @@ import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
+import dev.refox.anitrack.database.AnimesDBViewModel
+import dev.refox.anitrack.database.AnimesDBViewModelFactory
+import dev.refox.anitrack.database.AnimesRepository
 import dev.refox.anitrack.databinding.AnimeBottomSheetBinding
 import dev.refox.anitrack.models.topAnimeModel.Data
+import dev.refox.anitrack.networking.Repository
+import dev.refox.anitrack.viewmodels.AnimeViewModel
+import dev.refox.anitrack.viewmodels.AnimeViewModelFactory
 
 class AnimeDetailsBottomSheet(val anime: Data): BottomSheetDialogFragment(){
 
@@ -21,6 +29,7 @@ class AnimeDetailsBottomSheet(val anime: Data): BottomSheetDialogFragment(){
     }
 
     lateinit var binding: AnimeBottomSheetBinding
+    lateinit var animesDBViewModel: AnimesDBViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,6 +74,8 @@ class AnimeDetailsBottomSheet(val anime: Data): BottomSheetDialogFragment(){
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -77,3 +88,4 @@ class AnimeDetailsBottomSheet(val anime: Data): BottomSheetDialogFragment(){
     }
 
 }
+

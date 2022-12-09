@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 
 class AnimesRepository(private val animesDao: AnimesDao) {
 
-    val allAnimesLists: LiveData<List<Animes>> = animesDao.getAllAnimes()
+    val allAnimesLists: LiveData<MutableList<Animes>> = animesDao.getAllAnimes()
 
     @WorkerThread
     fun insertAnimes(animes: Animes) {

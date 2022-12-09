@@ -11,4 +11,5 @@ data class Animes(
     var status: String = "",
     var season: String = "",
     var url: String = "",
+    var noOfEpisodes: Int = 0,
 )

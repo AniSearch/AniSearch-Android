@@ -15,8 +15,8 @@ class AnimesDBViewModel(private val repository: AnimesRepository) : ViewModel() 
     private var parentJob = Job()
     private val scope = CoroutineScope(parentJob + Dispatchers.Main)
 
-//    private val repository: AnimesRepository
-    val allAnimesLists: LiveData<List<Animes>> = repository.allAnimesLists
+
+    val allAnimesLists: LiveData<MutableList<Animes>> = repository.allAnimesLists
 
 //    init {
 //        val animesDao = AnimesRoomDatabase.getAnimesDatabase(application).animesDao()

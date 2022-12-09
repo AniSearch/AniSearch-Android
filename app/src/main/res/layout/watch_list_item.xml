@@ -44,8 +44,6 @@
             </com.google.android.material.card.MaterialCardView>
 
 
-
-
             <TextView
                 android:id="@+id/tvWatchAnimeName"
                 android:layout_width="0dp"
@@ -53,7 +51,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/sofiaprosoftbold"
-                android:maxLines="3"
+                android:maxLines="2"
                 android:text="Naruto"
                 android:textColor="@color/black"
                 android:textSize="20sp"

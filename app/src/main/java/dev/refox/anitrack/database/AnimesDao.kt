@@ -6,7 +6,7 @@ import androidx.room.*
 @Dao
 interface AnimesDao {
     @Query("SELECT * FROM anime_list_table")
-    fun getAllAnimes(): LiveData<List<Animes>>
+    fun getAllAnimes(): LiveData<MutableList<Animes>>
 
     @Insert
     fun insertAnimes(vararg attendance: Animes)

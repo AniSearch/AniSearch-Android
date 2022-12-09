@@ -102,7 +102,8 @@ class SearchAnimeFragment : Fragment() {
                     episodes = it.episodes.toString(),
                     status = it.status,
                     season = it.season,
-                    url = it.images.jpg.imageUrl
+                    url = it.images.jpg.imageUrl,
+                    noOfEpisodes = 0
                 )
                 animeData.id = System.currentTimeMillis()
 

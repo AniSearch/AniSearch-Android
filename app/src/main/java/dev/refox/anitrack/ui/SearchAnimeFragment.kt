@@ -68,11 +68,14 @@ class SearchAnimeFragment : Fragment() {
 
         animeViewModel.getTopAnime()
 
+        var loadProgress = binding.shimmerEffect
 
 
 
         animeViewModel.topResponse.observe(viewLifecycleOwner, Observer {
             val data: MutableList<Data> = it.body()!!.data as MutableList<Data>
+
+            loadProgress.visibility = View.GONE
 
             animeAdapter = AnimeTopSearchAdapter(data)
             animeAdapter.notifyDataSetChanged()
@@ -83,14 +86,6 @@ class SearchAnimeFragment : Fragment() {
 
             animeAdapter.onItemClick = {
                 val dialog = AnimeDetailsBottomSheet(it)
-
-                val bottomSheetView = layoutInflater.inflate(R.layout.anime_bottom_sheet, null)
-                val btnAdd = bottomSheetView.findViewById<MaterialCardView>(R.id.btnAddToLib)
-
-                btnAdd.setOnClickListener {
-                    Toast.makeText(requireContext(), "Adding Anime to Library", Toast.LENGTH_SHORT).show()
-                }
-
                 dialog.setCancelable(true)
                 dialog.show(parentFragmentManager,"AnimeBottomSheetDialog")
             }
@@ -115,21 +110,19 @@ class SearchAnimeFragment : Fragment() {
                 longPressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 longPressDialog.show()
 
-
-
                 val btnAdd = longPressDialogBinding.findViewById<MaterialCardView>(R.id.btnAdd)
                 btnAdd.setOnClickListener {
                     animesDBViewModel.insertAnimes(animeData)
                     Toast.makeText(context, "Added Anime to your library", Toast.LENGTH_SHORT).show()
                     longPressDialog.dismiss()
                 }
-
-
             }
 
         })
 
         binding.btnSearch.setOnClickListener {
+
+            loadProgress.visibility = View.VISIBLE
 
             var queryString: String = binding.searchEditText.text.toString()
 
@@ -140,7 +133,7 @@ class SearchAnimeFragment : Fragment() {
             animeViewModel.searchResponse.observe(viewLifecycleOwner, Observer {
                 val sData: MutableList<Data> = it.body()!!.data as MutableList<Data>
 
-                Log.d("statusCode", it.code().toString())
+                loadProgress.visibility = View.GONE
 
                 animeAdapter = AnimeTopSearchAdapter(sData)
 
@@ -154,16 +147,36 @@ class SearchAnimeFragment : Fragment() {
 
                 animeAdapter.onItemClick = {
                     val dialog = AnimeDetailsBottomSheet(it)
-
-                    val bottomSheetView = layoutInflater.inflate(R.layout.anime_bottom_sheet, null)
-                    val btnAdd = bottomSheetView.findViewById<MaterialCardView>(R.id.btnAddToLib)
-
-                    btnAdd.setOnClickListener {
-                        Toast.makeText(requireContext(), "Debz Added Anime to Library", Toast.LENGTH_SHORT).show()
-                    }
-
                     dialog.setCancelable(true)
                     dialog.show(parentFragmentManager,"AnimeBottomSheetDialog")
+                }
+
+                animeAdapter.onItemLongClick = {
+
+                    val animeData = Animes(
+                        name = it.title,
+                        episodes = it.episodes.toString(),
+                        status = it.status,
+                        season = it.season,
+                        url = it.images.jpg.imageUrl,
+                        noOfEpisodes = 0
+                    )
+                    animeData.id = System.currentTimeMillis()
+
+                    val longPressDialogBinding = layoutInflater.inflate(R.layout.add_to_lib_dialog, null)
+                    val longPressDialog = Dialog(requireContext())
+
+                    longPressDialog.setContentView(longPressDialogBinding)
+                    longPressDialog.setCancelable(true)
+                    longPressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    longPressDialog.show()
+
+                    val btnAdd = longPressDialogBinding.findViewById<MaterialCardView>(R.id.btnAdd)
+                    btnAdd.setOnClickListener {
+                        animesDBViewModel.insertAnimes(animeData)
+                        Toast.makeText(context, "Added Anime to your library", Toast.LENGTH_SHORT).show()
+                        longPressDialog.dismiss()
+                    }
                 }
 
             })

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,6 +17,7 @@ import dev.refox.anitrack.R
 import dev.refox.anitrack.database.Animes
 import dev.refox.anitrack.database.AnimesDBViewModel
 import dev.refox.anitrack.databinding.WatchListItemBinding
+import dev.refox.anitrack.utils.Snacker
 
 class AnimeWatchListAdapter(
     val animesDBViewModel: AnimesDBViewModel,
@@ -49,15 +51,25 @@ class AnimeWatchListAdapter(
         Picasso.get().load(animeItem.url).into(holder.animeDBPic)
 
         holder.btnAddEpisodes.setOnClickListener {
-            animeItem.noOfEpisodes += 1
-            animesDBViewModel.updateAnimes(animeItem)
-            holder.animeDBNoOfEpisodes.text = animeItem.noOfEpisodes.toString()
+            if(holder.animeDBNoOfEpisodes.text.toString().equals(holder.animeDBEpisodes)){
+                Snacker(it,"Maximum Episodes reached").error()
+            } else {
+                animeItem.noOfEpisodes += 1
+                animesDBViewModel.updateAnimes(animeItem)
+                holder.animeDBNoOfEpisodes.text = animeItem.noOfEpisodes.toString()
+            }
+
         }
 
         holder.btnSubEpisodes.setOnClickListener {
-            animeItem.noOfEpisodes -= 1
-            animesDBViewModel.updateAnimes(animeItem)
-            holder.animeDBNoOfEpisodes.text = animeItem.noOfEpisodes.toString()
+            if(holder.animeDBNoOfEpisodes.text.toString() == "0"){
+                Snacker(it,"Episodes cannot be in negative").error()
+            } else {
+                animeItem.noOfEpisodes -= 1
+                animesDBViewModel.updateAnimes(animeItem)
+                holder.animeDBNoOfEpisodes.text = animeItem.noOfEpisodes.toString()
+            }
+
         }
 
     }

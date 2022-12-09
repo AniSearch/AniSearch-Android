@@ -12,8 +12,18 @@
     <color name="material_blue">#4599FF</color>
     <color name="material_purple">#B15AFF</color>
     <color name="material_green">#43C685</color>
+    <color name="material_orange">#FF6D63</color>
     <color name="subtle_red">#D2FFC8D2</color>
     <color name="dark">#4D4D4D</color>
     <color name="grey">#727272</color>
     <color name="material_grey">#EFEFEF</color>
+    <color name="trans">#00FFFFFF</color>
+    <color name="card_color1">#FFF1D4</color>
+    <color name="card_color2">#FFDAB8</color>
+    <color name="card_color3">#FFD3D3</color>
+
+    <!--SnackBar Colors-->
+    <color name="colorSuccess">#4caf50</color>
+    <color name="colorError">#d32f2f</color>
+    <color name="colorWarning">#ff9800</color>
 </resources>

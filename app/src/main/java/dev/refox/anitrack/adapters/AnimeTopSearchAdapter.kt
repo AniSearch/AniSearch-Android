@@ -17,6 +17,7 @@ class AnimeTopSearchAdapter(
 ) : RecyclerView.Adapter<AnimeTopSearchAdapter.AnimeViewHolder>() {
 
     var onItemClick : ((Data) -> Unit)? = null
+    var onItemLongClick : ((Data) -> Unit)? = null
 
     class AnimeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val animePic: ImageView = itemView.findViewById(R.id.animePic)
@@ -40,6 +41,10 @@ class AnimeTopSearchAdapter(
           onItemClick?.invoke(anime)
         }
 
+        holder.itemView.setOnLongClickListener {
+            onItemLongClick?.invoke(anime)
+            true
+        }
     }
 
     override fun getItemCount(): Int {

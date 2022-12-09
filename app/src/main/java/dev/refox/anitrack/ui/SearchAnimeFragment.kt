@@ -1,5 +1,9 @@
 package dev.refox.anitrack.ui
 
+import android.annotation.SuppressLint
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.card.MaterialCardView
 import dev.refox.anitrack.R
 import dev.refox.anitrack.adapters.AnimeTopSearchAdapter
+import dev.refox.anitrack.database.*
 import dev.refox.anitrack.databinding.FragmentSearchAnimeBinding
 import dev.refox.anitrack.models.topAnimeModel.Data
 import dev.refox.anitrack.networking.Repository
@@ -20,6 +25,7 @@ import dev.refox.anitrack.viewmodels.AnimeViewModel
 import dev.refox.anitrack.viewmodels.AnimeViewModelFactory
 
 private lateinit var animeViewModel: AnimeViewModel
+private lateinit var animesDBViewModel: AnimesDBViewModel
 private lateinit var animeAdapter: AnimeTopSearchAdapter
 
 @Suppress("DEPRECATION")
@@ -34,11 +40,20 @@ class SearchAnimeFragment : Fragment() {
         Repository()
     }
 
+    private val database by lazy {
+        AnimesRoomDatabase.getAnimesDatabase(requireContext())
+    }
+
+    private val animesRepository: AnimesRepository by lazy {
+        AnimesRepository(database.animesDao())
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +63,8 @@ class SearchAnimeFragment : Fragment() {
 
         animeViewModel =
             ViewModelProvider(this, AnimeViewModelFactory(repository))[AnimeViewModel::class.java]
+
+        animesDBViewModel = ViewModelProvider(this, AnimesDBViewModelFactory(animesRepository))[AnimesDBViewModel::class.java]
 
         animeViewModel.getTopAnime()
 
@@ -76,6 +93,37 @@ class SearchAnimeFragment : Fragment() {
 
                 dialog.setCancelable(true)
                 dialog.show(parentFragmentManager,"AnimeBottomSheetDialog")
+            }
+
+            animeAdapter.onItemLongClick = {
+
+                val animeData = Animes(
+                    name = it.title,
+                    episodes = it.episodes.toString(),
+                    status = it.status,
+                    season = it.season,
+                    url = it.images.jpg.imageUrl
+                )
+                animeData.id = System.currentTimeMillis()
+
+                val longPressDialogBinding = layoutInflater.inflate(R.layout.add_to_lib_dialog, null)
+                val longPressDialog = Dialog(requireContext())
+
+                longPressDialog.setContentView(longPressDialogBinding)
+                longPressDialog.setCancelable(true)
+                longPressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                longPressDialog.show()
+
+
+
+                val btnAdd = longPressDialogBinding.findViewById<MaterialCardView>(R.id.btnAdd)
+                btnAdd.setOnClickListener {
+                    animesDBViewModel.insertAnimes(animeData)
+                    Toast.makeText(context, "Added Anime to your library", Toast.LENGTH_SHORT).show()
+                    longPressDialog.dismiss()
+                }
+
+
             }
 
         })

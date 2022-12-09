@@ -49,7 +49,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchLayout"
         tools:itemCount="15"
-        tools:layout_editor_absoluteX="10dp"
         tools:listitem="@layout/anime_item_layout" />
 
 

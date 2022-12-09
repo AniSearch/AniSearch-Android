@@ -8,9 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="material_red">#FF7189</color>
+    <color name="material_red_dark">#FF4766</color>
     <color name="material_blue">#4599FF</color>
     <color name="material_purple">#B15AFF</color>
+    <color name="material_green">#43C685</color>
     <color name="subtle_red">#D2FFC8D2</color>
     <color name="dark">#4D4D4D</color>
     <color name="grey">#727272</color>
+    <color name="material_grey">#EFEFEF</color>
 </resources>

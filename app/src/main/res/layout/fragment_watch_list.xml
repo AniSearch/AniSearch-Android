@@ -29,6 +29,16 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+    <ImageView
+        android:id="@+id/btnInfo"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_baseline_info_24"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/materialCardText"
+        app:layout_constraintStart_toEndOf="@+id/materialCardText"
+        app:layout_constraintTop_toTopOf="@id/materialCardText" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWatchList"
         android:layout_width="match_parent"

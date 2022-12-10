@@ -1,7 +1,6 @@
 package dev.refox.anitrack.viewmodels
 
 import androidx.lifecycle.*
-import dev.refox.anitrack.models.searchedAnimeModel.SearchedAnime
 import dev.refox.anitrack.models.topAnimeModel.TopAnime
 import dev.refox.anitrack.networking.AnimeRetrofitInstance
 import dev.refox.anitrack.networking.Repository

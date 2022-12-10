@@ -1,6 +1,6 @@
 package dev.refox.anitrack.networking
 
-import dev.refox.anitrack.models.searchedAnimeModel.SearchedAnime
+
 import dev.refox.anitrack.models.topAnimeModel.TopAnime
 import retrofit2.Call
 import retrofit2.Response

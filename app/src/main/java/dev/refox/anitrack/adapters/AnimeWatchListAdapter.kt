@@ -1,5 +1,7 @@
 package dev.refox.anitrack.adapters
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +24,7 @@ import dev.refox.anitrack.utils.Snacker
 class AnimeWatchListAdapter(
     val animesDBViewModel: AnimesDBViewModel,
     val animesWatchList: MutableList<Animes>,
+    val context: Context
 ) : RecyclerView.Adapter<AnimeWatchListAdapter.AnimeDBViewHolder>() {
 
     class AnimeDBViewHolder(val binding: WatchListItemBinding, val context: Context): RecyclerView.ViewHolder(binding.root) {
@@ -40,18 +43,20 @@ class AnimeWatchListAdapter(
         return AnimeDBViewHolder(binding, parent.context)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: AnimeDBViewHolder, position: Int) {
 
         val animeItem = animesWatchList[position]
 
         holder.animeDBName.text = animeItem.name
-        holder.animeDBEpisodes.text = animeItem.episodes
-        holder.animeDBStatus.text = animeItem.status
+        holder.animeDBEpisodes.text = "Episodes: " + animeItem.episodes.toString()
+        holder.animeDBStatus.text = "Status: " + animeItem.status
         holder.animeDBNoOfEpisodes.text = animeItem.noOfEpisodes.toString()
+        holder.binding.tvWatchSeason.text = "Season: " + animeItem.season
         Picasso.get().load(animeItem.url).into(holder.animeDBPic)
 
         holder.btnAddEpisodes.setOnClickListener {
-            if(holder.animeDBNoOfEpisodes.text.toString().equals(holder.animeDBEpisodes)){
+            if(animeItem.noOfEpisodes >= animeItem.episodes){
                 Snacker(it,"Maximum Episodes reached").error()
             } else {
                 animeItem.noOfEpisodes += 1
@@ -69,6 +74,24 @@ class AnimeWatchListAdapter(
                 animesDBViewModel.updateAnimes(animeItem)
                 holder.animeDBNoOfEpisodes.text = animeItem.noOfEpisodes.toString()
             }
+
+        }
+
+        holder.binding.btnDelete.setOnClickListener {
+            AlertDialog.Builder(context)
+                .setTitle("Delete")
+                .setMessage("Are you sure you want to delete?")
+                .setPositiveButton("Yes") { dialog, _ ->
+                    animesDBViewModel.deleteAnimes(animeItem)
+                    Snacker(it, "Anime Deleted").success()
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    Snacker(it, "Anime Not Deleted").warning()
+                    animesDBViewModel.updateAnimes(animeItem)
+                }
+                .setCancelable(false)
+                .show()
+
 
         }
 

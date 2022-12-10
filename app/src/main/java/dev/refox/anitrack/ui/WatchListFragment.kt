@@ -49,7 +49,7 @@ class WatchListFragment : Fragment() {
 
             val watchData: MutableList<Animes> = it
 
-            animeWatchListAdapter = AnimeWatchListAdapter(animesDBViewModel, watchData)
+            animeWatchListAdapter = AnimeWatchListAdapter(animesDBViewModel, watchData, requireContext())
             binding.rvWatchList.adapter = animeWatchListAdapter
             binding.rvWatchList.setHasFixedSize(true)
             binding.rvWatchList.layoutManager = LinearLayoutManager(context)

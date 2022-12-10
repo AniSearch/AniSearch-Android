@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class Animes(
     @PrimaryKey(autoGenerate = true) var id: Long = 0L,
     var name: String = "",
-    var episodes: String = "",
+    var episodes: Int = 0,
     var status: String = "",
     var season: String = "",
     var url: String = "",

@@ -94,7 +94,7 @@ class SearchAnimeFragment : Fragment() {
 
                 val animeData = Animes(
                     name = it.title,
-                    episodes = it.episodes.toString(),
+                    episodes = it.episodes,
                     status = it.status,
                     season = it.season,
                     url = it.images.jpg.imageUrl,
@@ -155,7 +155,7 @@ class SearchAnimeFragment : Fragment() {
 
                     val animeData = Animes(
                         name = it.title,
-                        episodes = it.episodes.toString(),
+                        episodes = it.episodes,
                         status = it.status,
                         season = it.season,
                         url = it.images.jpg.imageUrl,

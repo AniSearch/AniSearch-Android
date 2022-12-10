@@ -21,6 +21,7 @@ import dev.refox.anitrack.database.*
 import dev.refox.anitrack.databinding.FragmentSearchAnimeBinding
 import dev.refox.anitrack.models.topAnimeModel.Data
 import dev.refox.anitrack.networking.Repository
+import dev.refox.anitrack.utils.Snacker
 import dev.refox.anitrack.viewmodels.AnimeViewModel
 import dev.refox.anitrack.viewmodels.AnimeViewModelFactory
 
@@ -33,7 +34,6 @@ class SearchAnimeFragment : Fragment() {
     private var _binding: FragmentSearchAnimeBinding? = null
     private val binding
         get() = _binding!!
-
 
 
     private val repository: Repository by lazy {
@@ -64,7 +64,10 @@ class SearchAnimeFragment : Fragment() {
         animeViewModel =
             ViewModelProvider(this, AnimeViewModelFactory(repository))[AnimeViewModel::class.java]
 
-        animesDBViewModel = ViewModelProvider(this, AnimesDBViewModelFactory(animesRepository))[AnimesDBViewModel::class.java]
+        animesDBViewModel = ViewModelProvider(
+            this,
+            AnimesDBViewModelFactory(animesRepository)
+        )[AnimesDBViewModel::class.java]
 
         animeViewModel.getTopAnime()
 
@@ -87,7 +90,7 @@ class SearchAnimeFragment : Fragment() {
             animeAdapter.onItemClick = {
                 val dialog = AnimeDetailsBottomSheet(it)
                 dialog.setCancelable(true)
-                dialog.show(parentFragmentManager,"AnimeBottomSheetDialog")
+                dialog.show(parentFragmentManager, "AnimeBottomSheetDialog")
             }
 
             animeAdapter.onItemLongClick = {
@@ -102,7 +105,8 @@ class SearchAnimeFragment : Fragment() {
                 )
                 animeData.id = System.currentTimeMillis()
 
-                val longPressDialogBinding = layoutInflater.inflate(R.layout.add_to_lib_dialog, null)
+                val longPressDialogBinding =
+                    layoutInflater.inflate(R.layout.add_to_lib_dialog, null)
                 val longPressDialog = Dialog(requireContext())
 
                 longPressDialog.setContentView(longPressDialogBinding)
@@ -113,7 +117,7 @@ class SearchAnimeFragment : Fragment() {
                 val btnAdd = longPressDialogBinding.findViewById<MaterialCardView>(R.id.btnAdd)
                 btnAdd.setOnClickListener {
                     animesDBViewModel.insertAnimes(animeData)
-                    Toast.makeText(context, "Added Anime to your library", Toast.LENGTH_SHORT).show()
+                    Snacker(it, "Anime added to your WatchList").success()
                     longPressDialog.dismiss()
                 }
             }
@@ -148,7 +152,7 @@ class SearchAnimeFragment : Fragment() {
                 animeAdapter.onItemClick = {
                     val dialog = AnimeDetailsBottomSheet(it)
                     dialog.setCancelable(true)
-                    dialog.show(parentFragmentManager,"AnimeBottomSheetDialog")
+                    dialog.show(parentFragmentManager, "AnimeBottomSheetDialog")
                 }
 
                 animeAdapter.onItemLongClick = {
@@ -163,7 +167,8 @@ class SearchAnimeFragment : Fragment() {
                     )
                     animeData.id = System.currentTimeMillis()
 
-                    val longPressDialogBinding = layoutInflater.inflate(R.layout.add_to_lib_dialog, null)
+                    val longPressDialogBinding =
+                        layoutInflater.inflate(R.layout.add_to_lib_dialog, null)
                     val longPressDialog = Dialog(requireContext())
 
                     longPressDialog.setContentView(longPressDialogBinding)
@@ -174,7 +179,8 @@ class SearchAnimeFragment : Fragment() {
                     val btnAdd = longPressDialogBinding.findViewById<MaterialCardView>(R.id.btnAdd)
                     btnAdd.setOnClickListener {
                         animesDBViewModel.insertAnimes(animeData)
-                        Toast.makeText(context, "Added Anime to your library", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Added Anime to your library", Toast.LENGTH_SHORT)
+                            .show()
                         longPressDialog.dismiss()
                     }
                 }

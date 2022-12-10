@@ -1,8 +1,14 @@
 package dev.refox.anitrack
 
+import android.app.AlertDialog
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -12,6 +18,7 @@ import dev.refox.anitrack.databinding.ActivityMainBinding
 import dev.refox.anitrack.ui.AnimeDetailsBottomSheet
 import dev.refox.anitrack.ui.SearchAnimeFragment
 import dev.refox.anitrack.ui.WatchListFragment
+import dev.refox.anitrack.utils.Snacker
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         replaceFragment(SearchAnimeFragment())
 
@@ -39,10 +47,9 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-//        val navHost = findViewById<View>(R.id.navHostFragmentAnime)
-//        binding.bottomNav.setupWithNavController(navHost.findNavController())
-
     }
+
+
 
     private fun replaceFragment(fragment: Fragment){
 

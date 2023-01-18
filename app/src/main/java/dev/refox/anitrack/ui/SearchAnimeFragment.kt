@@ -11,10 +11,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.card.MaterialCardView
+import dagger.hilt.android.AndroidEntryPoint
 import dev.refox.anitrack.R
 import dev.refox.anitrack.adapters.AnimeTopSearchAdapter
 import dev.refox.anitrack.database.*
@@ -26,10 +28,11 @@ import dev.refox.anitrack.viewmodels.AnimeViewModel
 import dev.refox.anitrack.viewmodels.AnimeViewModelFactory
 
 private lateinit var animeViewModel: AnimeViewModel
-private lateinit var animesDBViewModel: AnimesDBViewModel
+
 private lateinit var animeAdapter: AnimeTopSearchAdapter
 
 @Suppress("DEPRECATION")
+@AndroidEntryPoint
 class SearchAnimeFragment : Fragment() {
     private var _binding: FragmentSearchAnimeBinding? = null
     private val binding
@@ -64,10 +67,11 @@ class SearchAnimeFragment : Fragment() {
         animeViewModel =
             ViewModelProvider(this, AnimeViewModelFactory(repository))[AnimeViewModel::class.java]
 
-        animesDBViewModel = ViewModelProvider(
-            this,
-            AnimesDBViewModelFactory(animesRepository)
-        )[AnimesDBViewModel::class.java]
+//        animesDBViewModel = ViewModelProvider(
+//            this,
+//            AnimesDBViewModelFactory(animesRepository)
+//        )[AnimesDBViewModel::class.java]
+        val animesDBViewModel: AnimesDBViewModel by viewModels()
 
         animeViewModel.getTopAnime()
 

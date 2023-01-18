@@ -11,12 +11,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import dev.refox.anitrack.R
 import dev.refox.anitrack.adapters.AnimeWatchListAdapter
 import dev.refox.anitrack.database.*
 import dev.refox.anitrack.databinding.FragmentWatchListBinding
 
-
+@AndroidEntryPoint
 class WatchListFragment : Fragment() {
 
     private lateinit var animesDBViewModel: AnimesDBViewModel

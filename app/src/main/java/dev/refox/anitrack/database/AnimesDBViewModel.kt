@@ -4,25 +4,22 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.refox.anitrack.networking.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AnimesDBViewModel(private val repository: AnimesRepository) : ViewModel() {
+@HiltViewModel
+class AnimesDBViewModel @Inject constructor(private val repository: AnimesRepository) : ViewModel() {
 
     private var parentJob = Job()
     private val scope = CoroutineScope(parentJob + Dispatchers.Main)
 
 
     val allAnimesLists: LiveData<MutableList<Animes>> = repository.allAnimesLists
-
-//    init {
-//        val animesDao = AnimesRoomDatabase.getAnimesDatabase(application).animesDao()
-//        repository = AnimesRepository(animesDao)
-//        allAnimesLists = repository.allAnimesLists
-//    }
 
     fun insertAnimes(animes: Animes) = scope.launch(Dispatchers.IO) {
         repository.insertAnimes(animes)

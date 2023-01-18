@@ -4,9 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import dev.refox.anitrack.databinding.ActivityIntroBinding
 
-
+@AndroidEntryPoint
 class IntroActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityIntroBinding

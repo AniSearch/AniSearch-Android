@@ -1,11 +1,14 @@
 package dev.refox.anitrack.viewmodels
 
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.refox.anitrack.models.topAnimeModel.TopAnime
 import dev.refox.anitrack.networking.AnimeRetrofitInstance
 import dev.refox.anitrack.networking.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import javax.inject.Inject
+
 
 class AnimeViewModel(private val repository: Repository): ViewModel() {
 

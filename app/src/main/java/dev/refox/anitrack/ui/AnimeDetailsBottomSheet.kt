@@ -11,14 +11,15 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import dev.refox.anitrack.database.AnimesDBViewModel
 import dev.refox.anitrack.databinding.AnimeBottomSheetBinding
 import dev.refox.anitrack.models.topAnimeModel.Data
 import dev.refox.anitrack.networking.Repository
 import dev.refox.anitrack.viewmodels.AnimeViewModel
-import dev.refox.anitrack.viewmodels.AnimeViewModelFactory
 
 
+@AndroidEntryPoint
 class AnimeDetailsBottomSheet(val anime: Data): BottomSheetDialogFragment(){
 
     companion object {

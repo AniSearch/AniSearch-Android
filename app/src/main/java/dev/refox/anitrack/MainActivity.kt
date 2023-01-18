@@ -14,16 +14,18 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 import dev.refox.anitrack.databinding.ActivityMainBinding
 import dev.refox.anitrack.ui.AnimeDetailsBottomSheet
 import dev.refox.anitrack.ui.SearchAnimeFragment
 import dev.refox.anitrack.ui.WatchListFragment
 import dev.refox.anitrack.utils.Snacker
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var bottomNav: BottomNavigationView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

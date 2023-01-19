@@ -1,5 +1,11 @@
 # AniSearch
 
+[![GitHub issues](https://img.shields.io/github/issues/AniSearch/AniSearch-Android?color=%23f55d42)](https://github.com/AniSearch/AniSearch-Android/issues/)
+[![GitHub issues](https://img.shields.io/github/issues-closed/AniSearch/AniSearch-Android?color=yellow)](https://github.com/AniSearch/AniSearch-Android/issues/)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/AniSearch/AniSearch-Android/anisearch.yml?color=%2342f593)
+![GitHub](https://img.shields.io/github/license/AniSearch/AniSearch-Android)
+
+
 AniSearch is a material 3 designed modern android application that helps you search, read about and track your favourite animes.
 
 AniSearch uses an unofficial MyAnimeList Api made by Jikan.

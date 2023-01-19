@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.card.MaterialCardView
@@ -22,26 +23,24 @@ import dev.refox.anitrack.adapters.AnimeTopSearchAdapter
 import dev.refox.anitrack.database.*
 import dev.refox.anitrack.databinding.FragmentSearchAnimeBinding
 import dev.refox.anitrack.models.topAnimeModel.Data
-import dev.refox.anitrack.networking.Repository
 import dev.refox.anitrack.utils.Snacker
 import dev.refox.anitrack.viewmodels.AnimeViewModel
-import dev.refox.anitrack.viewmodels.AnimeViewModelFactory
 
-private lateinit var animeViewModel: AnimeViewModel
+//private lateinit var animeViewModel: AnimeViewModel
 
 private lateinit var animeAdapter: AnimeTopSearchAdapter
 
-@Suppress("DEPRECATION")
 @AndroidEntryPoint
+@Suppress("DEPRECATION")
 class SearchAnimeFragment : Fragment() {
     private var _binding: FragmentSearchAnimeBinding? = null
     private val binding
         get() = _binding!!
 
 
-    private val repository: Repository by lazy {
-        Repository()
-    }
+//    private val repository: Repository by lazy {
+//        Repository()
+//    }
 
     private val database by lazy {
         AnimesRoomDatabase.getAnimesDatabase(requireContext())
@@ -64,14 +63,17 @@ class SearchAnimeFragment : Fragment() {
 
         _binding = FragmentSearchAnimeBinding.inflate(inflater, container, false)
 
-        animeViewModel =
-            ViewModelProvider(this, AnimeViewModelFactory(repository))[AnimeViewModel::class.java]
+
 
 //        animesDBViewModel = ViewModelProvider(
 //            this,
 //            AnimesDBViewModelFactory(animesRepository)
 //        )[AnimesDBViewModel::class.java]
+
+
         val animesDBViewModel: AnimesDBViewModel by viewModels()
+
+        val animeViewModel: AnimeViewModel by viewModels()
 
         animeViewModel.getTopAnime()
 

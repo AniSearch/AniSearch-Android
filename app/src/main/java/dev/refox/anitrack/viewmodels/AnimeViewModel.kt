@@ -9,8 +9,8 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
 
-
-class AnimeViewModel(private val repository: Repository): ViewModel() {
+@HiltViewModel
+class AnimeViewModel @Inject constructor(private val repository: Repository): ViewModel() {
 
     private val _searchResponse = MutableLiveData<Response<TopAnime>>()
     val searchResponse: LiveData<Response<TopAnime>> get() = _searchResponse
@@ -33,8 +33,8 @@ class AnimeViewModel(private val repository: Repository): ViewModel() {
     }
 }
 
-class AnimeViewModelFactory(val repository: Repository): ViewModelProvider.Factory {
-    override fun <T: ViewModel> create(modelClass: Class<T>): T {
-        return AnimeViewModel(repository) as T
-    }
-}
+//class AnimeViewModelFactory(val repository: Repository): ViewModelProvider.Factory {
+//    override fun <T: ViewModel> create(modelClass: Class<T>): T {
+//        return AnimeViewModel(repository) as T
+//    }
+//}

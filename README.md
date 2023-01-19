@@ -3,7 +3,10 @@
 AniSearch is a material 3 designed modern android application that helps you search, read about and track your favourite animes.
 
 AniSearch uses an unofficial MyAnimeList Api made by Jikan.
-Link to Jikan Api v4:
+Link to Jikan Api v4: https://docs.api.jikan.moe/#section/Information
+
+# Libraries and Design Patterns Used: 
+MVVM Architecture, Retrofit2, OkHttp3, RoomDatabase, Hilt for DI.
 
 # Note
 
